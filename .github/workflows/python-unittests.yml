@@ -18,11 +18,7 @@ jobs:
       matrix:
         python-version: ['11', '12', '13']
         cfg:
-          - { os: windows-2025-vs2026, architecture: x64, whl: 'win_amd64' }
-          - { os: windows-11-vs2026-arm, architecture: arm64, whl: 'win_arm64' }
-          - { os: macos-15-intel, architecture: x64, whl: 'macosx_x86_64' }
-          - { os: macos-15, architecture: arm64, whl: 'macosx_arm64' }
-          - { os: ubuntu-24.04, architecture: x64, whl: 'manylinux_x86_64' }
+          - { os: ubuntu-24.04-arm, architecture: arm64, whl: 'manylinux_aarch64' }
 
     runs-on: ${{ matrix.cfg.os }}
     timeout-minutes: 45
