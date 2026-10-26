@@ -46,10 +46,3 @@ jobs:
       shell: bash
       run: |
         pip install twine
-
-    - name: Publish
-      env:
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.AMULET_ROCKSDB_PYPI_PASSWORD }}
-      run: |
-        twine upload dist/* --skip-existing
