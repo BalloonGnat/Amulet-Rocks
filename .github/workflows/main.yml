@@ -43,6 +43,7 @@ jobs:
       - name: Build aarch64 wheel
         env:
           CIBW_TEST_COMMAND: ""
+          CIBW_SKIP: "*-musllinux_*"
         run: |
           cibuildwheel --platform linux --archs aarch64 --output-dir dist .
 
