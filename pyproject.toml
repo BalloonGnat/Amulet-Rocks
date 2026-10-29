@@ -1,20 +1,20 @@
 [build-system]
 requires = [
-    "setuptools>=42",
-    "versioneer",
+    "setuptools>=68",
+    "wheel",
     "packaging",
+    "versioneer",
 ]
-build-backend = "build_requires"
-backend-path = [""]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "amulet-rocksdb"
 version = "1.0.6"
-authors = [
-    {name = "James Clare"},
-]
 description = "A pybind11 wrapper for Facebook's RocksDB."
-dynamic = ["version", "readme", "dependencies"]
+readme = { file = "README.md", content-type = "text/markdown" }
+authors = [
+    { name = "James Clare" },
+]
 requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -23,7 +23,7 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-    "setuptools>=42",
+    "setuptools>=68",
     "types-setuptools",
     "versioneer",
     "types-versioneer",
@@ -41,11 +41,15 @@ Homepage = "https://www.amuletmc.com"
 Repository = "https://github.com/Amulet-Team/Amulet-RocksDB"
 Issues = "https://github.com/Amulet-Team/Amulet-RocksDB/issues"
 
+[project.entry-points.pyinstaller40]
+hook-dirs = "rocksdb.__pyinstaller:get_hook_dirs"
+
 [tool.setuptools]
 include-package-data = false
+package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
-where = ["src/amulet"]
+where = ["src"]
 
 [tool.setuptools.package-data]
 "*" = [
@@ -55,23 +59,10 @@ where = ["src/amulet"]
     "**/*.lib",
 ]
 
-[tool.setuptools.dynamic]
-readme = {file = ["README.md"], content-type = "text/markdown"}
-
-[project.entry-points.pyinstaller40]
-hook-dirs = "rocksdb.__pyinstaller:get_hook_dirs"
-
-[tool.versioneer]
-VCS = "git"
-style = "pep440"
-versionfile_source = "src/amulet/rocksdb/_version.py"
-versionfile_build = "rocksdb/_version.py"
-tag_prefix = ""
-parentdir_prefix = "amulet_rocksdb-"
-
 [tool.cibuildwheel]
 test-sources = ["tests"]
 test-command = "python -m unittest discover -s tests"
+skip = ["*-musllinux_*"]
 
 [tool.cibuildwheel.macos]
 repair-wheel-command = """
