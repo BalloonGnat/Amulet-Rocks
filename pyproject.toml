@@ -9,6 +9,7 @@ backend-path = [""]
 
 [project]
 name = "amulet-rocksdb"
+version = "1.0.6"
 authors = [
     {name = "James Clare"},
 ]
